@@ -238,8 +238,11 @@ hpc/logs/*
 # HF/uv caches created by hpc/env.sh on the cluster
 .cache/
 
-# Training output; keep frozen split manifests in version control.
+# Training output
 runs/
+checkpoints/*
+!checkpoints/transformer.pt
+outputs/
 tests/
 .DS_Store
 
