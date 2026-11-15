@@ -1,0 +1,9 @@
+name: transformer
+
+init:
+  _target_: protgen.models.transformer.Transformer
+  dim_model: 128
+  nhead: 4
+  num_layers: 4
+  dim_feedforward: 512
+  dropout: 0.1
