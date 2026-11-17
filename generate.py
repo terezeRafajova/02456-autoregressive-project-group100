@@ -7,6 +7,8 @@ from protgen.data import ProteinDataset
 
 @hydra.main(config_path="config", config_name="default", version_base=None)
 def main(cfg):
+    torch.manual_seed(cfg.seed)
+
     if cfg.device == "auto":
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     else:

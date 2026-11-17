@@ -14,8 +14,8 @@ optimizer:
 
 validation_every_steps: 250
 patience: 8
-checkpoint_path: checkpoints/transformer.pt
-samples_path: results/sequences/transformer.csv
+checkpoint_path: checkpoints/${model.name}.pt
+samples_path: results/sequences/${model.name}.csv
 num_samples: 500
 temperature: 1.0
 

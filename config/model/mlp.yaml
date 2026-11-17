@@ -1,0 +1,7 @@
+name: mlp
+
+init:
+  _target_: protgen.models.mlp.MLPLanguageModel
+  context: 3
+  embedding_size: 32
+  num_hidden: 256
