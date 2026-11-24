@@ -1,0 +1,31 @@
+defaults:
+  - model: transformer
+  - _self_
+
+seed: 0
+device: auto
+
+batch_size: 64
+num_epochs: 30
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 1e-3
+
+validation_every_steps: 100
+patience: 8
+
+checkpoint_path: checkpoints/${model.name}.pt
+classifier_path: checkpoints/${model.name}_classifier.pt
+
+guidance:
+  family: HPr     
+  lam: 1.0        
+  num_samples: 500
+  temperature: 1.0
+  chunk_size: 100  
+samples_path: results/sequences/${model.name}_guided_${guidance.family}_lam${guidance.lam}.csv
+
+hydra:
+  job:
+    chdir: false
