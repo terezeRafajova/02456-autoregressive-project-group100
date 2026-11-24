@@ -70,14 +70,19 @@ class Transformer(nn.Module):
         self.norm = nn.LayerNorm(dim_model)
         self.head = nn.Linear(dim_model, vocab_size)
 
-    # calls forward methods of the different layers, including the position encoding
-    def forward(self, x, y = None):
+    # runs the stack and returns the hidden state of every position, so that the next-token head
+    # and the family head of phase 2 can share the same encoding of the sequence
+    def features(self, x, y = None):
         B, T = x.shape
         h = self.token_emb(x) * math.sqrt(self.d_model)
         h = self.pos_enc(h)
         h = self.encoder(h, mask=causal_mask(T, device=x.device))
 
-        return self.head(self.norm(h))
+        return self.norm(h)
+
+    # calls forward methods of the different layers, including the position encoding
+    def forward(self, x, y = None):
+        return self.head(self.features(x, y))
 
 
     # calculates loss between the predicted next letter and the actual one from the test sequence
